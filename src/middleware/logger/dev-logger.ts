@@ -8,7 +8,6 @@ function buildDevLogger(serviceName: string): Logger {
 
   const logger = createLogger({
     format: combine(colorize(), timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), errors({ stack: true }), logFormat),
-    // defaultMeta: { service: serviceName },
     transports: [new transports.Console()],
   });
 

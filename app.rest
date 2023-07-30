@@ -1,0 +1,28 @@
+GET http://localhost:8010/po/api/exercises?page=3
+
+###
+
+GET http://localhost:8010/po/api/workouts
+
+###
+
+POST http://localhost:8010/po/api/workouts
+Content-Type: application/json
+
+{
+  "exerciseId": "64c6cbc4b25f066f3b8194cf",
+  "sets": {
+    "1": {
+      "weight": 20,
+      "reps": 10
+    },
+    "2": {
+      "weight": 30,
+      "reps": 5
+    },
+    "3": {
+      "weight": 35,
+      "reps": 3
+    }
+  }
+}

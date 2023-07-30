@@ -2,12 +2,13 @@ import dotenv from 'dotenv-safe';
 
 dotenv.config();
 
-const { env } = process;
+const { PORT, BASE_URL, SERVICE_NAME, DB_CONN_STR } = process.env;
 
 const config = {
-  port: env.PORT,
-  baseURL: env.BASE_URL,
-  serviceName: env.SERVICE_NAME,
+  port: PORT,
+  baseURL: BASE_URL,
+  dbConnStr: DB_CONN_STR,
+  serviceName: SERVICE_NAME,
 };
 
 export default config;
