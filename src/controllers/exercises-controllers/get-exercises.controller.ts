@@ -6,9 +6,9 @@ import * as aggregations from '@src/aggregations';
 const exerciseService = Service('Exercise');
 
 export const getExercises = async (req: Request, res: Response) => {
+  const limit = 12;
   const q = req.query.q || '';
   const page = Number(req.query.page || 0);
-  const limit = 12;
 
   const qRegex = new RegExp(`${q}`, 'gi');
   const query = {

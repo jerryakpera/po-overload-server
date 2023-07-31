@@ -5,7 +5,7 @@ import Service from '@src/Service';
 const workoutService = Service('Workout');
 
 export const createWorkout = async (req: Request, res: Response) => {
-  const { sets, exerciseId } = req.body;
+  const { sets, exerciseId, uid } = req.body;
 
   let progressive_overload = 0;
 
@@ -20,6 +20,7 @@ export const createWorkout = async (req: Request, res: Response) => {
   }
 
   let workout = {
+    uid,
     sets,
     exerciseId,
     progressive_overload,

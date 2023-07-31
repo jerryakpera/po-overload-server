@@ -20,6 +20,7 @@ export const Workout = (query: object) => {
       $project: {
         _id: 1,
         exercise: 1,
+        uid: 1,
         exerciseId: 1,
         sets: 1,
         progression: 1,

@@ -10,6 +10,7 @@ type Sets = {
 };
 
 export interface IWorkout {
+  uid: string;
   exerciseId: ObjectId;
   sets: Sets;
   progression: number;
@@ -18,6 +19,7 @@ export interface IWorkout {
 
 export interface EWorkout extends Document {
   _id: ObjectId;
+  uid: string;
   exerciseId: ObjectId;
   exercise: EExercise;
   sets: Sets;
@@ -30,6 +32,11 @@ const WorkoutSchema = new Schema<IWorkout>(
     exerciseId: {
       type: Schema.Types.ObjectId,
       ref: 'Exercise',
+      required: true,
+    },
+
+    uid: {
+      type: String,
       required: true,
     },
 
