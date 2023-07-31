@@ -11,7 +11,6 @@ export const getExercises = async (req: Request, res: Response) => {
   const limit = 12;
 
   const qRegex = new RegExp(`${q}`, 'gi');
-
   const query = {
     $or: [
       {

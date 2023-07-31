@@ -19,11 +19,18 @@ export const createWorkout = async (req: Request, res: Response) => {
     progressive_overload += total;
   }
 
-  const workout = {
+  let workout = {
     sets,
     exerciseId,
     progressive_overload,
+    progression: 0,
   };
+
+  const lastWorkout = await workoutService.getMostRecent({});
+  const lastProgressiveOverload = lastWorkout?.progressive_overload || 0;
+  const progression = workout.progressive_overload - lastProgressiveOverload;
+
+  workout.progression = progression;
 
   await workoutService.create(workout);
 

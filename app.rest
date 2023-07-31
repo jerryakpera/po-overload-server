@@ -1,4 +1,12 @@
-GET http://localhost:8010/po/api/exercises?page=3
+GET http://localhost:8010/po/api/exercises
+
+###
+
+GET http://localhost:8010/po/api/exercises/workouts
+
+###
+
+GET https://poverload-api.onrender.com/po/api/exercises?page=3
 
 ###
 
@@ -13,14 +21,18 @@ Content-Type: application/json
   "exerciseId": "64c6cbc4b25f066f3b8194cf",
   "sets": {
     "1": {
-      "weight": 20,
+      "weight": 25,
       "reps": 10
     },
     "2": {
-      "weight": 30,
+      "weight": 40,
       "reps": 5
     },
     "3": {
+      "weight": 35,
+      "reps": 3
+    },
+    "4": {
       "weight": 35,
       "reps": 3
     }
