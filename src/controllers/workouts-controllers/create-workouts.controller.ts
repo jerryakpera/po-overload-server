@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import Service from '@src/Service';
+import { IWorkout } from '@src/models';
 
 const workoutService = Service('Workout');
 
@@ -19,19 +20,27 @@ export const createWorkout = async (req: Request, res: Response) => {
     progressive_overload += total;
   }
 
-  let workout = {
+  let workout: IWorkout = {
     uid,
     sets,
     exerciseId,
     progressive_overload,
-    progression: 0,
+    progression: {
+      percent: 0,
+      amount: 0,
+    },
   };
 
   const lastWorkout = await workoutService.getMostRecent({});
   const lastProgressiveOverload = lastWorkout?.progressive_overload || 0;
-  const progression = workout.progressive_overload - lastProgressiveOverload;
 
-  workout.progression = progression;
+  const progressionAmount = workout.progressive_overload - lastProgressiveOverload;
+  const progressionPercent = (progressionAmount / workout.progressive_overload) * 100;
+
+  workout.progression = {
+    amount: progressionAmount,
+    percent: progressionPercent,
+  };
 
   await workoutService.create(workout);
 

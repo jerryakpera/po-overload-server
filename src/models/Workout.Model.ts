@@ -9,21 +9,26 @@ type Sets = {
   };
 };
 
+type Progression = {
+  percent: number;
+  amount: number;
+};
+
 export interface IWorkout {
+  sets: Sets;
   uid: string;
   exerciseId: ObjectId;
-  sets: Sets;
-  progression: number;
+  progression: Progression;
   progressive_overload: number;
 }
 
 export interface EWorkout extends Document {
-  _id: ObjectId;
-  uid: string;
-  exerciseId: ObjectId;
-  exercise: EExercise;
   sets: Sets;
-  progression: number;
+  uid: string;
+  _id: ObjectId;
+  exercise: EExercise;
+  exerciseId: ObjectId;
+  progression: Progression;
   progressive_overload: number;
 }
 
@@ -46,7 +51,7 @@ const WorkoutSchema = new Schema<IWorkout>(
     },
 
     progression: {
-      type: Number,
+      type: Object,
     },
 
     progressive_overload: {
