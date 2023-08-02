@@ -13,17 +13,17 @@ export const Exercise = (query: object) => {
     },
     {
       $project: {
-        _id: 1,
-        Category: 1,
-        Difficulty: 1,
         id: 1,
-        exercise_name: 1,
-        steps: 1,
+        _id: 1,
+        name: 1,
         target: 1,
-        youtubeURL: 1,
+        gifUrl: 1,
+        bodyPart: 1,
         workouts: 1,
+        equipment: 1,
         createdAt: 1,
         updatedAt: 1,
+        demonstration: 1,
       },
     },
   ];

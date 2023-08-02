@@ -18,23 +18,32 @@ POST http://localhost:8010/po/api/workouts
 Content-Type: application/json
 
 {
-  "exerciseId": "64c6cbc4b25f066f3b8194cf",
   "sets": {
-    "1": {
-      "weight": 25,
-      "reps": 10
-    },
-    "2": {
-      "weight": 40,
-      "reps": 5
-    },
-    "3": {
-      "weight": 35,
-      "reps": 3
-    },
-    "4": {
-      "weight": 35,
-      "reps": 3
-    }
-  }
+    "1": { "weight": "body", "reps": "12", "overload": 12, "type": "text" },
+    "2": { "reps": "", "weight": "", "overload": "", "type": "number" }
+  },
+  "uid": "xOGfBAiTgWhPVsDCMlmsgUycU6D2",
+  "exerciseId": "64c97c81e9d6fa793227f258"
 }
+
+# {
+#   "exerciseId": "64c6cbc4b25f066f3b8194cf",
+#   "sets": {
+#     "1": {
+#       "weight": 25,
+#       "reps": 10
+#     },
+#     "2": {
+#       "weight": 40,
+#       "reps": 5
+#     },
+#     "3": {
+#       "weight": 35,
+#       "reps": 3
+#     },
+#     "4": {
+#       "weight": 35,
+#       "reps": 3
+#     }
+#   }
+# }

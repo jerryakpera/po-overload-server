@@ -12,11 +12,12 @@ export const createWorkout = async (req: Request, res: Response) => {
 
   for (let i = 0; i < Object.keys(sets).length; i++) {
     const set = Object.keys(sets)[i];
-    const { weight, reps } = sets[set];
+    const { weight, reps, type } = sets[set];
 
     if (!weight || !reps) continue;
 
-    const total = weight * reps;
+    const weightValue = type === 'text' ? 1 : Number(weight);
+    const total = weightValue * Number(reps);
     progressive_overload += total;
   }
 
@@ -35,6 +36,7 @@ export const createWorkout = async (req: Request, res: Response) => {
   const lastProgressiveOverload = lastWorkout?.progressive_overload || 0;
 
   const progressionAmount = workout.progressive_overload - lastProgressiveOverload;
+  console.log(progressionAmount);
   const progressionPercent = (progressionAmount / workout.progressive_overload) * 100;
 
   workout.progression = {

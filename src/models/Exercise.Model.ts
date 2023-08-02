@@ -1,64 +1,59 @@
 import { Document, ObjectId, Schema, models, model } from 'mongoose';
 
-type ExerciseTarget = {
-  Primary: string[];
-};
-
 export interface IExercise {
-  id: number;
-  Category: string;
-  Difficulty: string;
-  exercise_name: string;
-  steps: string[];
-  target: ExerciseTarget;
-  youtubeURL: string;
+  id: string;
+  name: string;
+  gifUrl: string;
+  target: string;
+  bodyPart: string;
+  equipment: string;
+  demonstration: string;
 }
 
 export interface EExercise extends Document {
   id: number;
   _id: ObjectId;
-  Category: string;
-  Difficulty: string;
-  exercise_name: string;
-  steps: string[];
-  target: ExerciseTarget;
-  youtubeURL: string[];
+  name: string;
+  gifUrl: string;
+  target: string;
+  bodyPart: string;
+  equipment: string;
+  demonstration: string;
 }
 
 const ExerciseSchema = new Schema<IExercise>(
   {
-    Category: {
+    name: {
       type: String,
       trim: true,
-    },
-
-    Difficulty: {
-      type: String,
-      trim: true,
+      required: true,
     },
 
     id: {
-      type: Number,
-      trim: true,
-    },
-
-    exercise_name: {
       type: String,
       trim: true,
     },
 
-    steps: [
-      {
-        type: String,
-        trim: true,
-      },
-    ],
-
-    target: {
-      type: Object,
+    gifUrl: {
+      type: String,
+      trim: true,
     },
 
-    youtubeURL: {
+    target: {
+      type: String,
+      trim: true,
+    },
+
+    bodyPart: {
+      type: String,
+    },
+
+    equipment: {
+      type: String,
+      trim: true,
+    },
+
+    demonstration: {
       type: String,
       trim: true,
     },

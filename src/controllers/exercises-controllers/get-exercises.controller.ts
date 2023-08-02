@@ -14,19 +14,13 @@ export const getExercises = async (req: Request, res: Response) => {
   const query = {
     $or: [
       {
-        Category: qRegex,
+        name: qRegex,
       },
       {
-        exercise_name: qRegex,
+        bodyPart: qRegex,
       },
       {
-        'target.Primary': qRegex,
-      },
-      {
-        'target.Secondary': qRegex,
-      },
-      {
-        'target.Tertiary': qRegex,
+        target: qRegex,
       },
     ],
   };
