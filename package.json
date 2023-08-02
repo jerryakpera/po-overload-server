@@ -2,7 +2,7 @@
   "name": "typescript-eslint-jest-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon",
     "prod": "cross-env NODE_ENV=production node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/src/index.js",
