@@ -23,7 +23,7 @@ export const Workout = (query: object) => {
         uid: 1,
         exerciseId: 1,
         sets: 1,
-        progression: 1,
+        stats: 1,
         progressive_overload: 1,
         createdAt: 1,
         updatedAt: 1,

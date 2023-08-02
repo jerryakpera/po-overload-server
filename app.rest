@@ -6,6 +6,10 @@ GET http://localhost:8010/po/api/exercises/workouts
 
 ###
 
+GET http://localhost:8010/po/api/exercises/workouts/xOGfBAiTgWhPVsDCMlmsgUycU6D2
+
+###
+
 GET https://poverload-api.onrender.com/po/api/exercises?page=3
 
 ###
@@ -19,8 +23,7 @@ Content-Type: application/json
 
 {
   "sets": {
-    "1": { "weight": "body", "reps": "12", "overload": 12, "type": "text" },
-    "2": { "reps": "", "weight": "", "overload": "", "type": "number" }
+    "1": { "weight": "body", "reps": "20", "overload": 12, "type": "text" }
   },
   "uid": "xOGfBAiTgWhPVsDCMlmsgUycU6D2",
   "exerciseId": "64c97c81e9d6fa793227f258"

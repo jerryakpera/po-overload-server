@@ -9,16 +9,18 @@ type Sets = {
   };
 };
 
-type Progression = {
-  percent: number;
-  amount: number;
+type Stats = {
+  differenceWithLastPO: number;
+  differenceWithAveragePO: number;
+  percentageDifferenceWithLastPO: string;
+  percentageDifferenceWithAveragePO: string;
 };
 
 export interface IWorkout {
   sets: Sets;
   uid: string;
   exerciseId: ObjectId;
-  progression: Progression;
+  stats: Stats;
   progressive_overload: number;
 }
 
@@ -28,7 +30,7 @@ export interface EWorkout extends Document {
   _id: ObjectId;
   exercise: EExercise;
   exerciseId: ObjectId;
-  progression: Progression;
+  stats: Stats;
   progressive_overload: number;
 }
 
@@ -50,7 +52,7 @@ const WorkoutSchema = new Schema<IWorkout>(
       trim: true,
     },
 
-    progression: {
+    stats: {
       type: Object,
     },
 

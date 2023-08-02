@@ -2,11 +2,21 @@ import { Request, Response } from 'express';
 
 import Service from '@src/Service';
 import { IWorkout } from '@src/models';
+import * as aggregations from '@src/aggregations';
+import {
+  getExerciseWithWorkouts,
+  getMongooseID,
+  getTotalProgressiveOverloadFromWorkout,
+  getPercentageDiff,
+  getAveragePO,
+} from '@src/utils';
 
 const workoutService = Service('Workout');
+const exerciseService = Service('Exercise');
 
 export const createWorkout = async (req: Request, res: Response) => {
   const { sets, exerciseId, uid } = req.body;
+  const exercise_id = getMongooseID(exerciseId);
 
   let progressive_overload = 0;
 
@@ -26,23 +36,34 @@ export const createWorkout = async (req: Request, res: Response) => {
     sets,
     exerciseId,
     progressive_overload,
-    progression: {
-      percent: 0,
-      amount: 0,
+    stats: {
+      differenceWithLastPO: 0,
+      differenceWithAveragePO: 0,
+      percentageDifferenceWithLastPO: '',
+      percentageDifferenceWithAveragePO: '',
     },
   };
 
-  const lastWorkout = await workoutService.getMostRecent({});
-  const lastProgressiveOverload = lastWorkout?.progressive_overload || 0;
+  const exercise = await getExerciseWithWorkouts({ uid, exerciseId });
+  const lastWorkout = await workoutService.getMostRecent({ uid, exerciseId });
 
-  const progressionAmount = workout.progressive_overload - lastProgressiveOverload;
-  console.log(progressionAmount);
-  const progressionPercent = (progressionAmount / workout.progressive_overload) * 100;
+  const lastPO = lastWorkout?.progressive_overload || 0;
+  const averagePO = getAveragePO(exercise?.workouts || []);
 
-  workout.progression = {
-    amount: progressionAmount,
-    percent: progressionPercent,
+  const currentPO = workout.progressive_overload;
+  const differenceWithLastPO: number = currentPO - lastPO;
+  const percentageDifferenceWithLastPO: string = getPercentageDiff(currentPO, lastPO);
+  const differenceWithAveragePO: number = currentPO - averagePO;
+  const percentageDifferenceWithAveragePO: string = getPercentageDiff(currentPO, averagePO);
+
+  const stats: any = {
+    differenceWithLastPO,
+    differenceWithAveragePO,
+    percentageDifferenceWithLastPO,
+    percentageDifferenceWithAveragePO,
   };
+
+  workout.stats = stats;
 
   await workoutService.create(workout);
 
