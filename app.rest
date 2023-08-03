@@ -6,7 +6,7 @@ GET http://localhost:8010/po/api/exercises/workouts
 
 ###
 
-GET http://localhost:8010/po/api/exercises/workouts/xOGfBAiTgWhPVsDCMlmsgUycU6D2
+GET http://localhost:8010/po/api/exercises/workouts/FTSRwSwszFTWXJYJpgMSemAlpjj1
 
 ###
 
