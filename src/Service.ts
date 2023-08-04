@@ -50,6 +50,10 @@ export default (modelName: string) => {
         .limit(itemsPerPage);
     },
 
+    async aggregateAll(aggregationQuery: any) {
+      return models[modelName as keyof ServiceModels].aggregate(aggregationQuery);
+    },
+
     async updateMany(query: object, update: object) {
       return models[modelName as keyof ServiceModels].updateMany(query, update);
     },
