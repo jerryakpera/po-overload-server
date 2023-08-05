@@ -8,7 +8,7 @@ const exerciseService = Service('Exercise');
 
 export const getWorkoutExercises = async (req: Request, res: Response) => {
   const { uid } = req.params;
-  const usersWorkouts = await workoutService.getMany({ uid });
+  const usersWorkouts = await workoutService.getAll({ uid });
   const workoutExercises = usersWorkouts.map(workout => workout.exerciseId);
 
   const exercisesQuery = {
@@ -18,7 +18,6 @@ export const getWorkoutExercises = async (req: Request, res: Response) => {
   };
 
   const exercisesWorkoutsAggregation = aggregations.ExercisesWorkout(exercisesQuery, uid);
-
   const exercises = await exerciseService.aggregateMany(exercisesWorkoutsAggregation);
 
   return res.json({

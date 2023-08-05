@@ -37,6 +37,10 @@ export default (modelName: string) => {
         .limit(itemsPerPage);
     },
 
+    async getAll(query: object = {}) {
+      return models[modelName as keyof ServiceModels].find(query);
+    },
+
     async aggregateOne(aggregationQuery: any) {
       const result = await models[modelName as keyof ServiceModels].aggregate(aggregationQuery);
 
