@@ -4,6 +4,22 @@ export const Workout = (query: object) => {
       $match: query,
     },
     {
+      $group: {
+        _id: '$exerciseId',
+        workouts: {
+          $push: '$$ROOT',
+        },
+      },
+    },
+    {
+      $set: {
+        _id: '$_id',
+        exerciseId: {
+          $first: '$workouts.exerciseId',
+        },
+      },
+    },
+    {
       $lookup: {
         from: 'exercises',
         localField: 'exerciseId',
@@ -13,20 +29,108 @@ export const Workout = (query: object) => {
     },
     {
       $set: {
-        exercise: { $first: '$exercise' },
+        exercise: {
+          $first: '$exercise',
+        },
+        name: {
+          $first: '$exercise.name',
+        },
+        gifUrl: {
+          $first: '$exercise.gifUrl',
+        },
+        target: {
+          $first: '$exercise.target',
+        },
+        bodyPart: {
+          $first: '$exercise.bodyPart',
+        },
+        equipment: {
+          $first: '$exercise.equipment',
+        },
+        createdAt: {
+          $first: '$exercise.createdAt',
+        },
+        updatedAt: {
+          $first: '$exercise.updatedAt',
+        },
+        demonstration: {
+          $first: '$exercise.demonstration',
+        },
       },
     },
     {
       $project: {
-        _id: 1,
-        exercise: 1,
-        uid: 1,
-        exerciseId: 1,
-        sets: 1,
-        stats: 1,
-        progressive_overload: 1,
+        sortedWorkouts: {
+          $sortArray: {
+            input: '$workouts',
+            sortBy: {
+              createdAt: -1,
+            },
+          },
+        },
+        workouts: 1,
+        name: 1,
+        gifUrl: 1,
+        target: 1,
+        bodyPart: 1,
+        equipment: 1,
         createdAt: 1,
         updatedAt: 1,
+        demonstration: 1,
+      },
+    },
+    {
+      $unwind: {
+        path: '$workouts',
+      },
+    },
+    {
+      $group: {
+        _id: '$_id',
+        averagePO: {
+          $avg: '$workouts.progressive_overload',
+        },
+        maxPO: {
+          $max: '$workouts.progressive_overload',
+        },
+        minPO: {
+          $min: '$workouts.progressive_overload',
+        },
+        workouts: {
+          $push: '$workouts',
+        },
+        sortedWorkouts: {
+          $first: '$sortedWorkouts',
+        },
+        name: {
+          $first: '$name',
+        },
+        gifUrl: {
+          $first: '$gifUrl',
+        },
+        target: {
+          $first: '$target',
+        },
+        bodyPart: {
+          $first: '$bodyPart',
+        },
+        equipment: {
+          $first: '$equipment',
+        },
+        createdAt: {
+          $first: '$createdAt',
+        },
+        updatedAt: {
+          $first: '$updatedAt',
+        },
+        demonstration: {
+          $first: '$demonstration',
+        },
+      },
+    },
+    {
+      $sort: {
+        'workouts.createdAt': -1,
       },
     },
   ];

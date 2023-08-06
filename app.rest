@@ -17,6 +17,14 @@ GET https://poverload-api.onrender.com/po/api/exercises?page=3
 GET http://localhost:8010/po/api/workouts
 
 ###
+# GET Users Workouts
+GET http://localhost:8010/po/api/workouts/kNyDotmXLUbfFXMuUnAw1078a2y2
+
+###
+
+DELETE http://localhost:8010/po/api/workouts/64cad975bb714011a421a5ba
+
+###
 
 POST http://localhost:8010/po/api/workouts
 Content-Type: application/json

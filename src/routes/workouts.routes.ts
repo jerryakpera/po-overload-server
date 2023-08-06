@@ -5,7 +5,9 @@ import { workoutsControllers } from '@src/controllers';
 
 const router = express.Router();
 
+router.get('/:uid', utils.use(workoutsControllers.getUsersWorkouts));
 router.get('/', utils.use(workoutsControllers.getWorkouts));
 router.post('/', utils.use(workoutsControllers.createWorkout));
+router.delete('/:workoutId', utils.use(workoutsControllers.deleteWorkout));
 
 export default router;
