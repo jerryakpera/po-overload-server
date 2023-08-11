@@ -9,7 +9,7 @@ export const getUsersWorkouts = async (req: Request, res: Response) => {
   const { uid } = req.params;
 
   const workoutsAggregation = aggregations.Workout({ uid });
-  const exercises = await workoutService.aggregateMany(workoutsAggregation);
+  const exercises = await workoutService.aggregateAll(workoutsAggregation);
 
   return res.json({
     message: 'OK',
