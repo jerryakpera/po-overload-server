@@ -5,6 +5,7 @@ import { workoutsControllers } from '@src/controllers';
 
 const router = express.Router();
 
+router.get('/:exerciseId/:uid', utils.use(workoutsControllers.getUsersExerciseWorkouts));
 router.get('/:uid', utils.use(workoutsControllers.getUsersWorkouts));
 router.get('/', utils.use(workoutsControllers.getWorkouts));
 router.post('/', utils.use(workoutsControllers.createWorkout));
